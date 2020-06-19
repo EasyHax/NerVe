@@ -2,7 +2,7 @@
 
 A simple Neural Network in V
 
-![](https://i.imgur.com/VvcajHz.png)
+![](https://i.imgur.com/MbxyHFV.jpg)
 
 # Doc
 
