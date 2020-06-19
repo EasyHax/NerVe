@@ -1,6 +1,8 @@
 # NerVe
 
-A simple Neural Network
+A simple Neural Network in V
+
+![](https://i.imgur.com/VvcajHz.png)
 
 # Doc
 
