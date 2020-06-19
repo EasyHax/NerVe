@@ -39,7 +39,7 @@ fn main() {
 
 	for _ in 0 .. 100 {
   
-    /*             teaching simple logic table      */
+                /*             teaching simple logic table      */
 		/*             A && B || C && D   =  E          */
 
 		nerve.teach( [1.0, 1.0, 1.0, 1.0], [1.0] )
