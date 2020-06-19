@@ -1,6 +1,6 @@
 # NerVe
 
-A simple Neural Network in V
+A simple Neural Network library in V
 
 ![](https://i.imgur.com/MbxyHFV.jpg)
 
