@@ -17,7 +17,7 @@ pub fn new(layer []int) &NeuralNetwork {
 }
 
 /* pub fn (mut n NeuralNetwork) teach(inputs []any_int, excepted []any_int) { */
-pub fn (n &NeuralNetwork) teach(inputs []f64, excepted []f64) {
+pub fn (mut n NeuralNetwork) teach(inputs []f64, excepted []f64) {
 
 	//i := inputs.map(f64(it))
 	//e := excepted.map(f64(it))
@@ -26,7 +26,7 @@ pub fn (n &NeuralNetwork) teach(inputs []f64, excepted []f64) {
 	n.backprop(excepted)
 }
 
-pub fn (n &NeuralNetwork) feed(inputs []f64) []f64 {
+pub fn (mut n NeuralNetwork) feed(inputs []f64) []f64 {
 
 	if inputs.len != n.layers[0].inputs.len {
 		panic('[!] feed forward error : inputs != neural_network.inputs')
@@ -40,7 +40,7 @@ pub fn (n &NeuralNetwork) feed(inputs []f64) []f64 {
 	return n.layers[n.layers.len - 1].outputs.clone()
 }
 
-fn (n &NeuralNetwork) backprop(excepted []f64) {
+fn (mut n NeuralNetwork) backprop(excepted []f64) {
 
 	if excepted.len != n.layers[n.layers.len - 1].outputs.len {
 		panic('[!] back propagation error : excepted != neural_network.outputs')
@@ -80,7 +80,7 @@ fn new_layer(n_inputs, n_outputs int) Layer {
 	return layer
 }
 
-fn (l &Layer) feed(inputs []f64) {
+fn (mut l Layer) feed(inputs []f64) {
 	l.inputs = inputs
 	for i in 0 .. l.outputs.len {
 		l.outputs[i] = 0
@@ -95,7 +95,7 @@ fn activation(value f64) f64 {
 	return 1 - (value * value)
 }
 
-fn (l &Layer) backprop_o(expected []f64) {
+fn (mut l Layer) backprop_o(expected []f64) {
 	for i in 0 .. l.outputs.len {
 		l.errors[i] = l.outputs[i] - expected[i]
 	}
@@ -109,7 +109,7 @@ fn (l &Layer) backprop_o(expected []f64) {
 	}
 }
  
-fn (l &Layer) backprop_h(gamma_forward []f64, weights_foward [][]f64) {
+fn (mut l Layer) backprop_h(gamma_forward []f64, weights_foward [][]f64) {
 	for i in 0 .. l.outputs.len {
 		l.gammas[i] = 0
 		for j in 0 .. gamma_forward.len {
@@ -124,7 +124,7 @@ fn (l &Layer) backprop_h(gamma_forward []f64, weights_foward [][]f64) {
 	}
 }
 
-fn (l &Layer) rand_weights() {
+fn (mut l Layer) rand_weights() {
 	for i in 0 .. l.outputs.len {
 		for j in 0 .. l.inputs.len {
 			l.weights[i][j] = rand.f64_in_range(-0.5, 0.5)
@@ -132,7 +132,7 @@ fn (l &Layer) rand_weights() {
 	}
 }
 
-fn (l &Layer) correct_weights() {
+fn (mut l Layer) correct_weights() {
 	for i in 0 .. l.outputs.len {
 		for j in 0 .. l.inputs.len {
 			l.weights[i][j] -= l.weights_delta[i][j] * 0.033
